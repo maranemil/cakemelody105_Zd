@@ -1,0 +1,272 @@
+<?php echo $this->doctype() ?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		
+		<title>
+			<?php $this->headTitle(); ?>
+		</title>
+		
+		<!-- 
+			This website is powered by Zend Framework - 
+			Zend Framework : the rapid development php framework 
+			Zend Framework enables PHP users at all levels to rapidly develop robust web applications.
+
+			Zend Framework is a free open source Framework licensed under GNU/GPL.
+			Information and contribution at http://codeigniter.com/
+		-->
+
+		<meta name="keywords" content="Social Portal, Youtube Songs, Favourites " />
+		<meta name="description" content="Social Portal - Keep your favourite songs in your list" />
+		
+		<link href="<?php echo $this->baseUrl(); ?>/webroot/favicon.ico" type="image/x-icon" rel="icon"/>
+		<!-- <link href="<?php echo $this->baseUrl(); ?>webroot/favicon.ico" type="image/x-icon" rel="shortcut icon"/> -->
+		<base href="<?php echo $this->baseUrl(); ?>" />
+
+		<? echo $this->headLink()->appendStylesheet($this->baseUrl() . '/webroot/css/style.css'); ?>
+		<? echo $this->headLink()->appendStylesheet($this->baseUrl() . '/webroot/css/jquery-impromptu.3.1.css'); ?>
+		<? echo $this->headLink()->appendStylesheet($this->baseUrl() . '/webroot/css/tipTip.css'); ?>
+
+		<script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/webroot/js/jquery-1.4.2.min.js"></script>
+		<script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/webroot/js/jquery_ui.js"></script>		
+		<script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/webroot/js/boxgrid.js"></script>		
+		<script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/webroot/js/jquery.tipTip.minified.js"></script> <!-- jquery.tipTip -->
+		<script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/webroot/js/jquery-impromptu.3.1.js"></script> <!-- jquery-impromptu -->
+
+		<!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script> -->
+		
+		<?
+			if(strstr($_SERVER['HTTP_USER_AGENT'],'MSIE 7.')){
+				echo '<meta http-equiv="X-UA-Compatible" content="IE=7" />';
+			}
+		?>
+
+		<script type="text/javascript">
+		// tiptip tooltip jquery
+		$(function(){
+			$(".tipnfo").tipTip({ maxWidth: "200px", edgeOffset: 10}); // 
+		});
+		</script>
+
+	</head>
+
+	<body>
+		<!-- Navigatore -->
+		<div id="navxbar">
+			<div id="navbar">
+		
+			<div  style="float: left; margin: 8px 20px 5px 0">
+				<? //if($this->session->userdata('username')){?>
+					<!-- Logged as: &nbsp; <A HREF="">mmm</A> | 	<A HREF="<?php echo $this->baseUrl(); ?>user/logout">Logout</A> -->
+				<?//}else{?>
+					<? //echo $this->baseUrl().'users/login/'; ?>
+						<table>
+							<tr>
+								<td>
+									Login: &nbsp;
+									<?php //echo form_input(array('name'=>'username','value'=>'email@','type'=>'text','class' => 'input_medium','size' => '15','onfocus'=>"this.value=&quot;&quot;","id"=>"UserUsername")).'';?><br />
+								</td>
+								<td>
+									<?php //echo form_input(array('name'=>'password','value'=>'password','type'=>'password','class' => 'input_medium','size' => '15','onfocus'=>"this.value=&quot;&quot;","id"=>"UserPassword")).'';?><br />
+								</td>
+								<td>
+									<div class="submit"><input type="submit" value="Login" /></div>
+								</td>
+							</tr>
+						</table>
+					<? //echo form_close();?>
+				<?//}?>
+			</div>
+
+			<!-- Search Box -->
+				<div id="searchform" style="float: right; margin: 10px 20px 5px 0">
+					<? //echo form_open(base_url().'videos/search/'); ?>
+						<input type="text" name="searchq" id="searchq" size="30" value="Search"  onfocus ='this.value=""'  />
+					</form>
+				</div>
+			<!-- / Search Box -->
+		
+			</div>
+		</div>
+		<!-- / Navigatore -->
+		<div id="breadcrumb" style="">
+				<!-- You are here: &nbsp; --><!--  http:// --><?//$_SERVER['HTTP_HOST']?><?//$_SERVER['REQUEST_URI']?>
+		
+			<div id="menutop" style="float: left">
+				
+				<a href="<?php echo $this->url( array('controller' => 'video', 'action' => 'index')); ?>">Home</a>
+				<a href="<?php echo $this->url( array('controller' => 'video', 'action' => 'topvideos')); ?>">Top Videos</a>
+				<a href="<?php echo $this->baseUrl(); ?>/video/newvideos/" id="">Fresh Videos</a> | 
+				<a href="<?php echo $this->baseUrl(); ?>/info/contactus/" id="">Impressum</a> | 
+				<? //if(!$this->session->userdata('username')){?>
+					<a href="<?php echo $this->baseUrl(); ?>/user/register/" id="">Register</a> | 
+					<a href="<?php echo $this->baseUrl(); ?>/user/login/" id="">Login  </a> |
+				<?//}?>
+				<a href="<?php echo $this->baseUrl(); ?>/info/whatisthis/" id="">What is this?</a> | 
+			</div>
+
+			<div id="menutoplogo" style="float: right">	</div>
+			<div style="clear: both"></div>
+
+		</div>
+
+	<div id="middlepage" style="">
+
+		<!-- Contenitore -->
+		<div id="content">
+
+			<!-- Contenitore Sinistro -->
+			<div id="contentleft">
+
+				<?php echo $this->layout()->content ?>&nbsp;
+
+			</div>
+			<div id="contentright">
+
+				<?// if($this->session->userdata('username')){?>
+					<div class="sidebaruser">
+						<ul class="sidebaruser">
+							<li><a href="<?php echo $this->baseUrl(); ?>/video/step1/1">Add Video</a></li>
+						</ul>
+					</div>
+				<?//}?>
+				
+
+				<!-- Sidebar -->
+				<div class="sidebar">
+					<!-- Latest Posts -->
+					<ul class="sidebar">
+						<li style="background: #F0D000; padding: 10px 0px 5px 10px">
+							<img src="<?php echo $this->baseUrl(); ?>/webroot/img/cakemelody.gif" width="214" height="33" border="0" alt="">
+						</li>
+						<li style="" id="downloadbutton">
+							<a href="http://code.google.com/p/marancakemelody/" target="_blank" class="downloadbutton">
+								Download cakeMelody 1.04
+							</a>
+						</li>
+						<li><a href="<?php echo $this->baseUrl(); ?>/video/recommended/" id="">Recomended Videos</a></li>
+						<li><a href="<?php echo $this->baseUrl(); ?>/video/newvideos" id="">Fresh Videos</a></li>
+						<li><a href="<?php echo $this->baseUrl(); ?>/video/topvideos/" id="">Top Videos</a></li>
+						<li><a href="<?php echo $this->baseUrl(); ?>/video/" id="">Last Videos</a></li>
+
+					</ul>
+				</div>
+
+				<div class="sidebarcat">
+					<ul class="sidebarcat">
+						<? 
+
+							$modelC = new My_Model_Category(); 
+							$categs = $modelC->getCategories();
+							
+							foreach($categs as $categ){
+							?>
+								<li><a href="<?php echo $this->baseUrl(); ?>/video/category/<?=$categ["id"]?>" id=""><?=$categ["name"]?></a></li>
+							<?
+							}
+						?>
+					</ul>
+				</div>
+
+				<br />
+				<div id="contentRtTags">
+					<?
+
+					$modelTg = new My_Model_Video(); 
+					$arTAgs = $modelTg->getRandTags(4);
+
+					foreach($arTAgs as $sTags){
+						
+						$arVTags = explode(" ",$sTags["tags"]);
+						
+						foreach($arVTags as $sSnTag){
+							if(strlen($sSnTag)>3){
+								$myfont = rand(8,18);
+								echo ' <A style="font: bold '.$myfont.'px arial; margin-right: 10px;" HREF="'.$this->baseUrl().'/videos/search?searchq='.trim($sSnTag).'">'.ucfirst($sSnTag).'</A> ';
+							}
+						}
+					}
+					?>
+				</div>
+				<br />
+
+		<!-- / Sidebar -->
+			</div>
+			<!-- / Contenitore Destro -->
+
+
+<div style="clear:both;"></div>
+		</div>
+		<!-- / Contenitore -->
+		<div style="clear:both;"></div>
+	</div>
+	
+		<!-- Footer Bar -->
+		<div id="footerbg">
+			<!-- Footer -->
+			<div id="footer">
+				<!-- Footer Element Left -->
+				<div id="footerleft">
+					<H1>CodeIgniter Resources</H1><br />
+					<ul>
+						<li><a href="https://github.com/balupton/balcms" target="_blank">Bal Cms</a></li>
+						<li><a href="https://github.com/Bittarman/d2-zf-sandbox" target="_blank"> Doctrine2 + Sandbox  </a></li>
+						<li><a href="https://github.com/bvincent/Zend-Cms" target="_blank"> Zend  CMS</a></li>
+						<li><a href="https://github.com/harikt/zendblog" target="_blank"> Blog App</a></li>
+						<li><a href="https://github.com/hikaru-shindo/FansubCMS" target="_blank"> FansubCMS</a></li>
+						<li><a href="https://github.com/jtietema/Fizzy" target="_blank"> Zend Doctrine CMS</a></li>
+						<li><a href="https://github.com/mgkimsal/zfkit" target="_blank"> Zend Framework Starter Kit </a></li>
+						<li><a href="https://github.com/michael-romer/zf-boilerplate" target="_blank"> Zend Framework Boilerplate </a></li>
+						<li><a href="https://github.com/mridgway/Blog" target="_blank"> Blog Zend / Doctrine </a></li>
+						<li><a href="https://github.com/topikito/ZendCMS" target="_blank"> CMS  Cms</a></li>
+						<li><a href="https://github.com/zucchi/titan" target="_blank"> Application  App</a></li>
+ 					</ul>
+				</div>
+				<!-- / Footer Element Left -->
+				
+				<!-- Blogroll -->
+				<div id="footermiddle">
+					<H1>Related Webs</H1><br />
+					<ul>
+						<li><a href="http://framework.zend.com/" target="_blank">framework.zend.com</a></li>
+						<li><a href="http://www.hotscripts.com/" target="_blank">www.hotscripts.com</a></li>
+						<li><a href="http://www.maran-emil.de/" target="_blank">www.maran-emil.de</a></li>
+						<li><a href="http://code.google.com/" target="_blank">code.google.com</a></li>
+						<li><a href="http://www.search-scripts.com/" target="_blank">www.search-scripts.com</a></li>
+						<li><a href="http://www.youtube.com/" target="_blank">www.youtube.com</a></li>
+						<li><a href="http://www.kewego.de/" target="_blank">www.kewego.de</a></li>
+						<li><a href="http://www.imagine-things.com/" target="_blank">www.imagine-things.com</a></li>
+					</ul>
+				</div>
+				<!-- / Blogroll -->
+				
+				<!-- Footer Element Right -->
+				<div id="footerright">
+					<!-- Credits -->
+					<H1>Credits</H1>
+					<p>
+						<?php //echo anchor('http://www.maran-emil.de','Developed with Emil Maran'); ?> <br />
+						Copyright&copy; <?php echo date("Y",time()); ?> Emil Maran.<br />
+						Icons from <?php //echo anchor('http://iconarchive.com',' iconarchive.com'); ?> <br />
+						</p>
+					<!-- / Credits -->
+					<?php //echo $html->image("card.gif"); ?>
+				</div>
+				<!-- / Footer Element Right -->
+			</div>
+			<div style="clear: both"></div>
+			<!-- / Footer -->
+		</div>
+		<!-- / Footer Bar -->
+
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
