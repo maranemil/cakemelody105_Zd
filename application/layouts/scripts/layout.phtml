@@ -3,7 +3,7 @@
 <head>
 
     <title>
-	   <?php $this->headTitle(); ?>
+        <?php $this->headTitle(); ?>
     </title>
 
     <!--
@@ -22,29 +22,31 @@
     <!-- <link href="<?php echo $this->baseUrl(); ?>webroot/favicon.ico" type="image/x-icon" rel="shortcut icon"/> -->
     <base href="<?php echo $this->baseUrl(); ?>"/>
 
-   <? echo $this->headLink()->appendStylesheet($this->baseUrl() . '/webroot/css/style.css'); ?>
-   <? echo $this->headLink()->appendStylesheet($this->baseUrl() . '/webroot/css/jquery-impromptu.3.1.css'); ?>
-   <? echo $this->headLink()->appendStylesheet($this->baseUrl() . '/webroot/css/tipTip.css'); ?>
+    <?php echo $this->headLink()->appendStylesheet($this->baseUrl() . '/webroot/css/style.css'); ?>
+    <?php echo $this->headLink()->appendStylesheet($this->baseUrl() . '/webroot/css/jquery-impromptu.3.1.css'); ?>
+    <?php echo $this->headLink()->appendStylesheet($this->baseUrl() . '/webroot/css/tipTip.css'); ?>
 
     <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/webroot/js/jquery-1.4.2.min.js"></script>
     <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/webroot/js/jquery_ui.js"></script>
     <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/webroot/js/boxgrid.js"></script>
-    <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/webroot/js/jquery.tipTip.minified.js"></script> <!-- jquery.tipTip -->
-    <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/webroot/js/jquery-impromptu.3.1.js"></script> <!-- jquery-impromptu -->
+    <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/webroot/js/jquery.tipTip.minified.js"></script>
+    <!-- jquery.tipTip -->
+    <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/webroot/js/jquery-impromptu.3.1.js"></script>
+    <!-- jquery-impromptu -->
 
     <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script> -->
 
-   <?
-   if (strstr($_SERVER['HTTP_USER_AGENT'], 'MSIE 7.')) {
-	  echo '<meta http-equiv="X-UA-Compatible" content="IE=7" />';
-   }
-   ?>
+    <?php
+    if (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 7.') !== false) {
+        echo '<meta http-equiv="X-UA-Compatible" content="IE=7" />';
+    }
+    ?>
 
     <script type="text/javascript">
-		// tiptip tooltip jquery
-		$(function () {
-			$(".tipnfo").tipTip({maxWidth: "200px", edgeOffset: 10}); //
-		});
+        // tiptip tooltip jquery
+        $(function () {
+            $(".tipnfo").tipTip({maxWidth: "200px", edgeOffset: 10}); //
+        });
     </script>
 
 </head>
@@ -55,19 +57,19 @@
     <div id="navbar">
 
         <div style="float: left; margin: 8px 20px 5px 0">
-		   <? //if($this->session->userdata('username')){?>
+            <?php //if($this->session->userdata('username')){?>
             <!-- Logged as: &nbsp; <A HREF="">mmm</A> | 	<A HREF="<?php echo $this->baseUrl(); ?>user/logout">Logout</A> -->
-		   <? //}else{?>
-		   <? //echo $this->baseUrl().'users/login/'; ?>
+            <?php //}else{?>
+            <?php //echo $this->baseUrl().'users/login/'; ?>
             <table>
                 <tr>
                     <td>
                         Login: &nbsp;
-					   <?php //echo form_input(array('name'=>'username','value'=>'email@','type'=>'text','class' => 'input_medium','size' => '15','onfocus'=>"this.value=&quot;&quot;","id"=>"UserUsername")).'';?>
+                        <?php //echo form_input(array('name'=>'username','value'=>'email@','type'=>'text','class' => 'input_medium','size' => '15','onfocus'=>"this.value=&quot;&quot;","id"=>"UserUsername")).'';?>
                         <br/>
                     </td>
                     <td>
-					   <?php //echo form_input(array('name'=>'password','value'=>'password','type'=>'password','class' => 'input_medium','size' => '15','onfocus'=>"this.value=&quot;&quot;","id"=>"UserPassword")).'';?>
+                        <?php //echo form_input(array('name'=>'password','value'=>'password','type'=>'password','class' => 'input_medium','size' => '15','onfocus'=>"this.value=&quot;&quot;","id"=>"UserPassword")).'';?>
                         <br/>
                     </td>
                     <td>
@@ -75,16 +77,16 @@
                     </td>
                 </tr>
             </table>
-		   <? //echo form_close();?>
-		   <? //}?>
+            <?php //echo form_close();?>
+            <?php //}?>
         </div>
 
         <!-- Search Box -->
         <div id="searchform" style="float: right; margin: 10px 20px 5px 0">
-		   <?php echo form_open(base_url().'videos/search/'); ?>
-                <label for="searchq">
-                    <input type="text" name="searchq" id="searchq" size="30" value="Search" onfocus='this.value=""'/>
-                </label>
+            <?php echo form_open(base_url() . 'videos/search/'); ?>
+            <label for="searchq">
+                <input type="text" name="searchq" id="searchq" size="30" value="Search" onfocus='this.value=""'/>
+            </label>
             </form>
         </div>
         <!-- / Search Box -->
@@ -93,7 +95,7 @@
 </div>
 <!-- / Navigatore -->
 <div id="breadcrumb" style="">
-    <!-- You are here: &nbsp; --><!--  http:// --><? //$_SERVER['HTTP_HOST']?><? //$_SERVER['REQUEST_URI']?>
+    <!-- You are here: &nbsp; --><!--  http:// --><?php //$_SERVER['HTTP_HOST']?><?php //$_SERVER['REQUEST_URI']?>
 
     <div id="menutop" style="float: left">
 
@@ -101,10 +103,10 @@
         <a href="<?php echo $this->url(array('controller' => 'video', 'action' => 'topvideos')); ?>">Top Videos</a>
         <a href="<?php echo $this->baseUrl(); ?>/video/newvideos/" id="">Fresh Videos</a> |
         <a href="<?php echo $this->baseUrl(); ?>/info/contactus/" id="">Impressum</a> |
-	   <? //if(!$this->session->userdata('username')){?>
+        <?php //if(!$this->session->userdata('username')){?>
         <a href="<?php echo $this->baseUrl(); ?>/user/register/" id="">Register</a> |
         <a href="<?php echo $this->baseUrl(); ?>/user/login/" id="">Login </a> |
-	   <? //}?>
+        <?php //}?>
         <a href="<?php echo $this->baseUrl(); ?>/info/whatisthis/" id="">What is this?</a> |
     </div>
 
@@ -121,25 +123,26 @@
         <!-- Contenitore Sinistro -->
         <div id="contentleft">
 
-		   <?php echo $this->layout()->content ?>&nbsp;
+            <?php echo $this->layout()->content ?>&nbsp;
 
         </div>
         <div id="contentright">
 
-		   <? // if($this->session->userdata('username')){?>
+            <?php // if($this->session->userdata('username')){?>
             <div class="sidebaruser">
                 <ul class="sidebaruser">
                     <li><a href="<?php echo $this->baseUrl(); ?>/video/step1/1">Add Video</a></li>
                 </ul>
             </div>
-		   <? //}?>
+            <?php //}?>
 
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Latest Posts -->
                 <ul class="sidebar">
                     <li style="background: #F0D000; padding: 10px 0 5px 10px">
-                        <img src="<?php echo $this->baseUrl(); ?>/webroot/img/cakemelody.gif" width="214" height="33" border="0" alt="">
+                        <img src="<?php echo $this->baseUrl(); ?>/webroot/img/cakemelody.gif" width="214" height="33"
+                             border="0" alt="">
                     </li>
                     <li style="" id="downloadbutton">
                         <a href="http://code.google.com/p/marancakemelody/" target="_blank" class="downloadbutton">
@@ -156,35 +159,36 @@
 
             <div class="sidebarcat">
                 <ul class="sidebarcat">
-				   <?
+                    <?php
 
-				   $modelC = new My_Model_Category();
-				   $categs = $modelC->getCategories();
+                    $modelC = new My_Model_Category();
+                    $categs = $modelC->getCategories();
 
-				   foreach ($categs as $categ) {
-					  ?>
-                       <li><a href="<?php echo $this->baseUrl(); ?>/video/category/<?= $categ["id"] ?>" id=""><?= $categ["name"] ?></a></li>
-					  <?
-				   }
-				   ?>
+                    foreach ($categs as $categ) {
+                        ?>
+                        <li><a href="<?php echo $this->baseUrl(); ?>/video/category/<?= $categ["id"] ?>"
+                               id=""><?= $categ["name"] ?></a></li>
+                        <?php
+                    }
+                    ?>
                 </ul>
             </div>
 
             <br/>
             <div id="contentRtTags">
-			   <?php
-			   $modelTg = new My_Model_Video();
-			   $arTAgs  = $modelTg->getRandTags(4);
-			   foreach ($arTAgs as $sTags) {
-				  $arVTags = explode(" ", $sTags["tags"]);
-				  foreach ($arVTags as $sSnTag) {
-					 if (strlen($sSnTag) > 3) {
-						$myfont = rand(8, 18);
-						echo ' <A style="font: bold ' . $myfont . 'px arial; margin-right: 10px;" HREF="' . $this->baseUrl() . '/videos/search?searchq=' . trim($sSnTag) . '">' . ucfirst($sSnTag) . '</A> ';
-					 }
-				  }
-			   }
-			   ?>
+                <?php
+                $modelTg = new My_Model_Video();
+                $arTAgs = $modelTg->getRandTags();
+                foreach ($arTAgs as $sTags) {
+                    $arVTags = explode(" ", $sTags["tags"]);
+                    foreach ($arVTags as $sSnTag) {
+                        if (strlen($sSnTag) > 3) {
+                            $myfont = mt_rand(8, 18);
+                            echo ' <A style="font: bold ' . $myfont . 'px arial; margin-right: 10px;" HREF="' . $this->baseUrl() . '/videos/search?searchq=' . trim($sSnTag) . '">' . ucfirst($sSnTag) . '</A> ';
+                        }
+                    }
+                }
+                ?>
             </div>
             <br/>
 
@@ -213,7 +217,8 @@
                 <li><a href="https://github.com/hikaru-shindo/FansubCMS" target="_blank"> FansubCMS</a></li>
                 <li><a href="https://github.com/jtietema/Fizzy" target="_blank"> Zend Doctrine CMS</a></li>
                 <li><a href="https://github.com/mgkimsal/zfkit" target="_blank"> Zend Framework Starter Kit </a></li>
-                <li><a href="https://github.com/michael-romer/zf-boilerplate" target="_blank"> Zend Framework Boilerplate </a></li>
+                <li><a href="https://github.com/michael-romer/zf-boilerplate" target="_blank"> Zend Framework
+                        Boilerplate </a></li>
                 <li><a href="https://github.com/mridgway/Blog" target="_blank"> Blog Zend / Doctrine </a></li>
                 <li><a href="https://github.com/topikito/ZendCMS" target="_blank"> CMS Cms</a></li>
                 <li><a href="https://github.com/zucchi/titan" target="_blank"> Application App</a></li>
@@ -242,12 +247,12 @@
             <!-- Credits -->
             <H1>Credits</H1>
             <p>
-			   <?php //echo anchor('http://www.maran-emil.de','Developed with Emil Maran'); ?> <br/>
-                Copyright&copy; <?php echo date("Y", time()); ?> Emil Maran.<br/>
+                <?php //echo anchor('http://www.maran-emil.de','Developed with Emil Maran'); ?> <br/>
+                Copyright&copy; <?php echo date("Y"); ?> Emil Maran.<br/>
                 Icons from <?php //echo anchor('http://iconarchive.com',' iconarchive.com'); ?> <br/>
             </p>
             <!-- / Credits -->
-		   <?php //echo $html->image("card.gif"); ?>
+            <?php //echo $html->image("card.gif"); ?>
         </div>
         <!-- / Footer Element Right -->
     </div>

@@ -4,12 +4,12 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
-   <?php $this->headTitle(); ?>
-   <?php //echo $this->headScript(); ?>
-   <?php
-   //echo $this->headLink()->appendStylesheet($this->baseUrl() . '/css/layout.css');
-   // echo $this->loadSkin($this->skin);
-   ?>
+    <?php $this->headTitle(); ?>
+    <?php //echo $this->headScript(); ?>
+    <?php
+    //echo $this->headLink()->appendStylesheet($this->baseUrl() . '/css/layout.css');
+    // echo $this->loadSkin($this->skin);
+    ?>
 </head>
 
 <body>
@@ -21,22 +21,22 @@
     <div id="nav">
         <a href="<?php echo $this->url(array('controller' => 'bug', 'action' => 'index')); ?>">Bugs</a>
         <a href="<?php echo $this->url(array('controller' => 'page', 'action' => 'list')); ?>">List page</a>
-	   <?php echo "asdfs" . $this->navigation()->breadcrumbs()->setLinkLast(true)->setSeparator(" : "); ?>
-	   <?php echo $this->layout()->nav; ?>&nbsp;
+        <?php echo $this->navigation()->breadcrumbs()->setLinkLast(true)->setSeparator(" : "); ?>
+        <?php echo $this->layout()->nav; ?>&nbsp;
     </div>
     <div id="sidebar">
         <div id="subNav">
-		   <?php echo $this->layout()->subNav; ?>&nbsp;
+            <?php echo $this->layout()->subNav; ?>&nbsp;
         </div>
         <div id="adminMenu">
-		   <?php echo $this->layout()->adminMenu; ?>&nbsp;
+            <?php echo $this->layout()->adminMenu; ?>&nbsp;
         </div>
         <div id="userForm">
-		   <?php echo $this->layout()->userForm; ?>&nbsp;
+            <?php echo $this->layout()->userForm; ?>&nbsp;
         </div>
     </div>
     <div id="main">
-	   <?php echo $this->layout()->content ?>&nbsp;
+        <?php echo $this->layout()->content ?>&nbsp;
     </div>
     <div id="footer">
         <p><em>

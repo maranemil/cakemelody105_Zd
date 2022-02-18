@@ -1,10 +1,13 @@
-<?php
+<?php /** @noinspection PhpUnused */
 
 Zend_View_Helper_PaginationControl::setDefaultViewPartial('controls.phtml');
 
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
-   protected function _initAutoload() {
+    /**
+     * @throws Zend_Loader_Exception
+     */
+    protected function _initAutoload() {
 	  $autoLoader = Zend_Loader_Autoloader::getInstance();
 
 	  $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
@@ -29,6 +32,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 	  $autoLoader->pushAutoloader($resourceLoader_cms);
    }
 
+    /**
+     * @return Zend_View
+     */
    protected function _initView() {
 	  // Initialize view
 	  $view = new Zend_View();

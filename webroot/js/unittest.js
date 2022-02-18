@@ -7,16 +7,17 @@
 // script.aculo.us is freely distributable under the terms of an MIT-style license.
 // For details, see the script.aculo.us web site: http://script.aculo.us/
 
+let Test = {};
 // experimental, Firefox-only
 Event.simulateMouse = function(element, eventName) {
-  var options = Object.extend({
+  const options = Object.extend({
     pointerX: 0,
     pointerY: 0,
-    buttons:  0,
-    ctrlKey:  false,
-    altKey:   false,
+    buttons: 0,
+    ctrlKey: false,
+    altKey: false,
     shiftKey: false,
-    metaKey:  false
+    metaKey: false
   }, arguments[2] || {});
   var oEvent = document.createEvent("MouseEvents");
   oEvent.initMouseEvent(eventName, true, true, document.defaultView, 
@@ -45,7 +46,7 @@ Event.simulateMouse = function(element, eventName) {
 // You need to downgrade to 1.0.4 for now to get this working
 // See https://bugzilla.mozilla.org/show_bug.cgi?id=289940 for the fix that fixed too much
 Event.simulateKey = function(element, eventName) {
-  var options = Object.extend({
+  const options = Object.extend({
     ctrlKey: false,
     altKey: false,
     shiftKey: false,
@@ -54,7 +55,7 @@ Event.simulateKey = function(element, eventName) {
     charCode: 0
   }, arguments[2] || {});
 
-  var oEvent = document.createEvent("KeyEvents");
+  const oEvent = document.createEvent("KeyEvents");
   oEvent.initKeyEvent(eventName, true, true, window, 
     options.ctrlKey, options.altKey, options.shiftKey, options.metaKey,
     options.keyCode, options.charCode );
@@ -62,12 +63,11 @@ Event.simulateKey = function(element, eventName) {
 };
 
 Event.simulateKeys = function(element, command) {
-  for(var i=0; i<command.length; i++) {
+  for(let i=0; i<command.length; i++) {
     Event.simulateKey(element,'keypress',{charCode:command.charCodeAt(i)});
   }
 };
 
-var Test = {}
 Test.Unit = {};
 
 // security exception workaround
@@ -148,7 +148,7 @@ Test.Unit.Runner.prototype = {
     }
     if(this.options.tests) {
       this.tests = [];
-      for(var i = 0; i < this.options.tests.length; i++) {
+      for(let i = 0; i < this.options.tests.length; i++) {
         if(/^test/.test(this.options.tests[i])) {
           this.tests.push(new Test.Unit.Testcase(this.options.tests[i], testcases[this.options.tests[i]], testcases["setup"], testcases["teardown"]));
         }

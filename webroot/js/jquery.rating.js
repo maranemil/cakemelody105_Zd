@@ -13,92 +13,107 @@
 /**
  * Create a degradeable star rating interface out of a simple form structure.
  * Returns a modified jQuery object containing the new interface.
- *   
+ *
  * @example jQuery('form.rating').rating();
  * @cat plugin
- * @type jQuery 
+ * @type jQuery
  *
  */
-jQuery.fn.rating = function(){
-	return this.each(function(){
-		var div = jQuery("<div/>").attr({
-			title: this.title,
-			className: this.className
-		}).insertAfter( this );
+jQuery.fn.rating = function () {
+    return this.each(function () {
+        const div = jQuery("<div/>").attr({
+            title: this.title,
+            className: this.className
+        }).insertAfter(this);
 
-		jQuery(this).find("select option").each(function(){
-			div.attr('class','rating ratingPos');
-			div.append( this.value == "0" ?"":
-				"<div class='star'><a href='#" + this.value + "' title='Give it a " +
-					this.value + " Star Rating'>" + this.value + "</a></div>" );
-		});
+        jQuery(this).find("select option").each(function () {
+            div.attr('class', 'rating ratingPos');
+            div.append(this.value === "0" ? "" :
+                "<div class='star'><a href='#" + this.value + "' title='Give it a " +
+                this.value + " Star Rating'>" + this.value + "</a></div>");
+        });
 
-		div.append("<div class='cancel'><a href='?' title='"+this.title+"'>"+this.title+"</a></div>");
+        div.append("<div class='cancel'><a href='?' title='" + this.title + "'>" + this.title + "</a></div>");
 
-		var averageRating = this.title.split(/:\s*/)[1].split("."),
-			url = this.action,
-			averageIndex = averageRating[0],
-			averagePercent = averageRating[1];
+        let averageRating = this.title.split(/:\s*/)[1].split("."),
+            url = this.action,
+            averageIndex = averageRating[0],
+            averagePercent = averageRating[1];
 
-		// hover events and focus events added
-		var stars = div.find("div.star")
-			.mouseover(drainFill).focus(drainFill)
-			.mouseout(drainReset).blur(drainReset)
-			.click(click);
+        // hover events and focus events added
+        const stars = div.find("div.star")
+            .mouseover(drainFill).focus(drainFill)
+            .mouseout(drainReset).blur(drainReset)
+            .click(click);
 
-		// cancel button events
-		/*
-		div.find("div.cancel")
-			.mouseover(drainAdd).focus(drainAdd)
-			.mouseout(resetRemove).blur(resetRemove)
-			.click(click);
-		*/
-		reset();
+        // cancel button events
+        /*
+        div.find("div.cancel")
+            .mouseover(drainAdd).focus(drainAdd)
+            .mouseout(resetRemove).blur(resetRemove)
+            .click(click);
+        */
+        reset();
 
-		function drainFill(){ drain(); fill(this); }
-		function drainReset(){ drain(); reset(); }
-		function resetRemove(){ reset(); jQuery(this).removeClass('on'); }
-		function drainAdd(){ drain(); jQuery(this).addClass('on'); }
+        function drainFill() {
+            drain();
+            fill(this);
+        }
 
-		function click(){
-			averageIndex = stars.index(this) + 1;
-			averagePercent = 0;
+        function drainReset() {
+            drain();
+            reset();
+        }
 
-			if ( averageIndex == 0 )
-				drain();
+        function resetRemove() {
+            reset();
+            jQuery(this).removeClass('on');
+        }
 
-			jQuery.post(url,{
-				rate: jQuery(this).find('a')[0].href.slice(-1)
-			}, function(data){
-					alert(data);
-			}
-			);
-			this.blur();
-			return false;
-		}
+        function drainAdd() {
+            drain();
+            jQuery(this).addClass('on');
+        }
 
-		// fill to the current mouse position.
-		function fill( elem ){
-			stars.find("a").css("width", "100%");
-			stars.lt( stars.index(elem) + 1 ).addClass("hover");
-		}
+        function click() {
+            averageIndex = stars.index(this) + 1;
+            averagePercent = 0;
 
-		// drain all the stars.
-		function drain(){
-			stars.removeClass("on hover");
-		}
+            if (averageIndex === 0)
+                drain();
 
-		// Reset the stars to the default index.
-		function reset(){
-			stars.lt(averageIndex).addClass("on");
+            jQuery.post(url, {
+                    rate: jQuery(this).find('a')[0].href.slice(-1)
+                }, function (data) {
+                    alert(data);
+                }
+            );
+            this.blur();
+            return false;
+        }
 
-			var percent = averagePercent ? averagePercent * 10 : 0;
-			if (percent > 0)
-				stars.eq(averageIndex).addClass("on").children("a").css("width", percent + "%");
-		}
-	}).remove();
+        // fill to the current mouse position.
+        function fill(elem) {
+            stars.find("a").css("width", "100%");
+            stars.lt(stars.index(elem) + 1).addClass("hover");
+        }
+
+        // drain all the stars.
+        function drain() {
+            stars.removeClass("on hover");
+        }
+
+        // Reset the stars to the default index.
+        function reset() {
+            stars.lt(averageIndex).addClass("on");
+
+            let percent = averagePercent ? averagePercent * 10 : 0;
+            if (percent > 0)
+                stars.eq(averageIndex).addClass("on").children("a").css("width", percent + "%");
+        }
+    }).remove();
 };
 
 // fix ie6 background flicker problem.
-if ( jQuery.browser.msie == true )
-	document.execCommand('BackgroundImageCache', false, true);
+if (jQuery.browser.msie === true)
+    document.execCommand('BackgroundImageCache', false, true);
